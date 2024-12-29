@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import { addToPaste } from "../redux/pasteSlice";
 
 const Home = () => {
   // for title value tracking
@@ -34,7 +35,7 @@ const Home = () => {
     setValue('');
     setSearchParams({});
 
-  }
+  };
 
   return (
     <div>
@@ -65,7 +66,7 @@ const Home = () => {
     </div>
   </div>
     
-  )
-}
+  );
+};
 
 export default Home
