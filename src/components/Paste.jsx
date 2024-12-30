@@ -15,10 +15,16 @@ const Paste = () => {
 
   return (
     <div>
-      <input
+      <input className='p-2 rounded-2xl min-w-[600px] mt-5'
       type='search'
-      
+      placeholder='search here'
+      value={SearchTerm}
+      onChange={(e)=> setSearchTerm(e.target.validationMessage)}
       />
+
+      <div>
+        
+      </div>
     </div>
   )
 }
