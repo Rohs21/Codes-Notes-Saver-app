@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromPaste } from '../redux/pasteSlice';
+import toast from 'react-hot-toast';
 
 const Paste = () => {
   const pastes = useSelector((state)=>state.paste.pastes);
@@ -30,10 +31,10 @@ const Paste = () => {
       <div className='flex flex-col gap-5 mt-5'>
         {
         filteredData.length > 0 &&
-        filteredData.map(
-          (paste) =>{
+        filteredData.map( (paste) =>
+          {
             return(
-              <div className='border'>
+              <div className='border' key={paste?._id}>
                 <div>
                   {paste.title}
                 </div>
@@ -50,7 +51,10 @@ const Paste = () => {
                   <button onClick={()=>handleDelete(paste?._id)}>
                     Delete
                   </button>
-                  <button>
+                  <button onClick={()=>{
+                    navigator.clipboard.writeText(paste?.content)
+                    toast.success("Copied to Clipboard")
+                  }}>
                     Copy
                   </button>
                   <button>
