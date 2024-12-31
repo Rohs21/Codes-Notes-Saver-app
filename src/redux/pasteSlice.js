@@ -39,10 +39,10 @@ export const pasteSlice = createSlice({
     },
 
     removeFromPaste: (state, action) => {
-      const paste = action.payload
+      const pasteId = action.payload
       console.log(pasteId);
-      const index = state.pastes.findIndex(() =>
-      item._id === paste.id);
+      const index = state.pastes.findIndex((item) =>
+      item._id === pasteId);
       if(index >=0){
         state.pastes.splice(index,1);
 
@@ -50,10 +50,9 @@ export const pasteSlice = createSlice({
         JSON.stringify(state.pastes));
 
         toast.success("Notes Deleted");
-
       }
 
-        
+      
     },
   },
 })

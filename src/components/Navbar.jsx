@@ -8,7 +8,7 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink to="/pastes">
-        All Pastes
+        All Notes
       </NavLink>
     </div>
   )
