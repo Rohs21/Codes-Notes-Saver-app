@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromPaste } from '../redux/pasteSlice';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const Paste = () => {
   const pastes = useSelector((state)=>state.paste.pastes);
@@ -43,12 +44,14 @@ const Paste = () => {
                 </div>
                 <div className='flex flex-row gap-4 place-content-evenly'>
                   <button>
-                    Edit
+                  <Link to={`/?pasteId=${paste?._id}}`}>
+                      Edit
+                  </Link>
                   </button>
                   <button>
-                      <a href={'/pastes/${paste?._id}'}> 
-                        View
-                      </a>
+                  <Link to={`/pastes/${paste?._id}`}>
+                      View
+                  </Link>
                   </button>
                   <button onClick={()=>handleDelete(paste?._id)}>
                     Delete
