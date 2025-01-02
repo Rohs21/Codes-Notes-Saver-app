@@ -7,7 +7,7 @@ const initialState = {
     : []
 }
 
-export const pasteSlice = createSlice({
+const pasteSlice = createSlice({
   name: 'paste',
   initialState,
   reducers: {
@@ -21,13 +21,13 @@ export const pasteSlice = createSlice({
 
     updateToPaste: (state, action) => {
       const paste = action.payload
-      const index = state.pastes.findIndex(() =>
-      item._id === paste.id);
+      const index = state.pastes.findIndex((item) =>
+      item._id === paste._id);
 
       if(index >= 0){
         state.pastes[index] = paste;
         localStorage.setItem("Pastes",
-        JSON.stringify(state.pastes));
+        JSON.stringify(state.pastes))
         toast.success("Notes Updated");
       }
 

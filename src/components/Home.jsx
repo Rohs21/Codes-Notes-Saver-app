@@ -1,25 +1,37 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { addToPaste } from "../redux/pasteSlice";
+import { addToPaste,updateToPaste } from "../redux/pasteSlice";
 
 const Home = () => {
   // for title value tracking
   const [title, setTitle] = useState("");
   // for content value tracking
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const pasteId = searchParams.get("pasteId");
   const dispatch = useDispatch();
+  const allpastes = useSelector((state) => state.paste.pastes);
 
-  function createPaste() {
+  useEffect(() => {
+
+    if(pasteId){
+      const paste = allpastes.find((p) => p._id === pasteId);
+      setTitle(paste.title);
+      setValue(paste.content);
+    }
+  }, [pasteId])
+  
+
+  const createPaste= () => {
     const paste = {
       title: title,
       content: value,
       _id: pasteId || Date.now().toString(36),
       createdAt: new Date().toISOString(),
 
-    }
+    };
+
 
     if(pasteId){
       // if pasteID is available ,Update paste ID:
@@ -31,11 +43,12 @@ const Home = () => {
     }
 
     //after creation or updation we need to clear the title,therefore:
-    setTitle('');
-    setValue('');
+    setTitle("");
+    setValue("");
     setSearchParams({});
 
   };
+
 
   return (
     <div>
@@ -52,6 +65,7 @@ const Home = () => {
         pasteId ? "Update Note" : "Create Note"
       }
     </button>
+
     </div>
 
     <div className='mt-8'>
