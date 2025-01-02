@@ -46,7 +46,9 @@ const Paste = () => {
                     Edit
                   </button>
                   <button>
-                    View
+                      <a href={'/pastes/${paste?._id}'}> 
+                        View
+                      </a>
                   </button>
                   <button onClick={()=>handleDelete(paste?._id)}>
                     Delete
